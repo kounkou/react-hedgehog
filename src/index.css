@@ -93,21 +93,33 @@ p {
 }
 
 .return-button {
-  background-color: #4CAF50; /* Green background */
-  color: white; /* White text */
-  border: none; /* No border */
-  padding: 10px 20px; /* Padding */
-  text-align: center; /* Center text */
-  text-decoration: none; /* No underline */
-  display: inline-block; /* Inline-block for layout */
-  font-size: 16px; /* Font size */
-  margin-top: 20px; /* Space from content */
-  cursor: pointer; /* Pointer cursor on hover */
-  border-radius: 5px; /* Rounded corners */
+  background-color: #4CAF50;
+  /* Green background */
+  color: white;
+  /* White text */
+  border: none;
+  /* No border */
+  padding: 10px 20px;
+  /* Padding */
+  text-align: center;
+  /* Center text */
+  text-decoration: none;
+  /* No underline */
+  display: inline-block;
+  /* Inline-block for layout */
+  font-size: 16px;
+  /* Font size */
+  margin-top: 20px;
+  /* Space from content */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  border-radius: 5px;
+  /* Rounded corners */
 }
 
 .return-button:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049;
+  /* Darker green on hover */
 }
 
 .about-page {
