@@ -126,21 +126,21 @@ const App: React.FC = () => {
       setEnd([row, col]);
       highlightSelection(start, [row, col]);
     }
-  };
+  };  
 
   const highlightSelection = (start: [number, number], end: [number, number]) => {
     const [startRow, startCol] = start;
     const [endRow, endCol] = end;
-
+  
     if (startRow !== endRow && startCol !== endCol && Math.abs(startRow - endRow) !== Math.abs(startCol - endCol)) {
       console.log("Selection must be in a row, column, or diagonal.");
       return;
     }
-
+  
     const newGrid = [...grid];
     let sequence: number[] = [];
     let highlightCells: [number, number][] = [];
-
+  
     if (startRow === endRow) {
       // Horizontal selection
       for (let col = Math.min(startCol, endCol); col <= Math.max(startCol, endCol); col++) {
@@ -159,7 +159,7 @@ const App: React.FC = () => {
       const colStep = startCol < endCol ? 1 : -1;
       let row = startRow;
       let col = startCol;
-
+  
       while (row !== endRow + rowStep && col !== endCol + colStep) {
         sequence.push(newGrid[row][col].value);
         highlightCells.push([row, col]);
@@ -167,34 +167,34 @@ const App: React.FC = () => {
         col += colStep;
       }
     }
-
+  
     // Ensure the sequence is at least 3 in size
     if (sequence.length < 3) {
       console.log("The sequence must be at least 3 numbers long.");
       return;
     }
-
+  
     const isCorrect = evaluateSequence(sequence);
-
+  
     if (isCorrect) {
       highlightCells.forEach(([row, col]) => {
         newGrid[row][col].isHighlighted = true;
       });
     }
-
+  
     setGrid(newGrid);
     setStart(null);
     setEnd(null);
   };
-
+  
 
   const evaluateSequence = (sequence: number[]) => {
     const sumOfRestExceptLast = sequence.slice(0, -1).reduce((acc, num) => acc + num, 0);
     const last = sequence[sequence.length - 1];
-
+  
     const sumOfRestExceptFirst = sequence.slice(1).reduce((acc, num) => acc + num, 0);
     const first = sequence[0];
-
+  
     if (sumOfRestExceptLast === last || sumOfRestExceptFirst === first) {
       const pointsScored = sumOfRestExceptLast === last ? sumOfRestExceptLast : sumOfRestExceptFirst;
       setScore((prevScore) => prevScore + pointsScored);
@@ -204,7 +204,7 @@ const App: React.FC = () => {
       console.log("Incorrect selection. Try again.");
       return false;
     }
-  };
+  };  
 
   const resetGrid = () => {
     setGrid(generateGrid());
@@ -216,16 +216,16 @@ const App: React.FC = () => {
   const showSolutions = () => {
     const newGrid = [...grid];
     let totalScore = 0;
-
+  
     const evaluateAndHighlight = (sequence: number[], highlightCells: [number, number][]) => {
       const sumOfRestExceptLast = sequence.slice(0, -1).reduce((acc, num) => acc + num, 0);
       const last = sequence[sequence.length - 1];
-
+    
       const sumOfRestExceptFirst = sequence.slice(1).reduce((acc, num) => acc + num, 0);
       const first = sequence[0];
-
+    
       let pointsScored = 0;
-
+    
       if (sequence.length >= 3 && (sumOfRestExceptLast === last || sumOfRestExceptFirst === first)) {
         pointsScored = sumOfRestExceptLast === last ? sumOfRestExceptLast : sumOfRestExceptFirst;
         highlightCells.forEach(([row, col]) => {
@@ -234,8 +234,8 @@ const App: React.FC = () => {
       }
       return pointsScored;
     };
-
-
+    
+  
     // Check all horizontal sequences
     for (let row = 0; row < GRID_SIZE; row++) {
       for (let colStart = 0; colStart < GRID_SIZE - 1; colStart++) {
@@ -254,7 +254,7 @@ const App: React.FC = () => {
         }
       }
     }
-
+  
     // Check all vertical sequences
     for (let col = 0; col < GRID_SIZE; col++) {
       for (let rowStart = 0; rowStart < GRID_SIZE - 1; rowStart++) {
@@ -273,7 +273,7 @@ const App: React.FC = () => {
         }
       }
     }
-
+  
     // Check all diagonal sequences (top-left to bottom-right)
     for (let rowStart = 0; rowStart < GRID_SIZE - 1; rowStart++) {
       for (let colStart = 0; colStart < GRID_SIZE - 1; colStart++) {
@@ -293,7 +293,7 @@ const App: React.FC = () => {
         }
       }
     }
-
+  
     // Check all diagonal sequences (top-right to bottom-left)
     for (let rowStart = 0; rowStart < GRID_SIZE - 1; rowStart++) {
       for (let colStart = GRID_SIZE - 1; colStart > 0; colStart--) {
@@ -313,20 +313,20 @@ const App: React.FC = () => {
         }
       }
     }
-
+  
     // Update grid and score after evaluating all solutions
     setGrid(newGrid);
     setScore(totalScore);
     console.log(`Displaying solutions. Total score: ${totalScore}`);
   };
-
+   
   const togglePopup = () => setIsPopupOpen(!isPopupOpen);
 
   return (
     <div style={{ padding: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h1>La Grille</h1>
       <h2>Points: {score}</h2>
-
+      
       <div
         style={{
           display: "grid",
@@ -389,7 +389,7 @@ const App: React.FC = () => {
         </button>
       </div>
       <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-        <button
+        <button 
           onClick={togglePopup}
           style={{
             padding: "10px 20px",
@@ -416,17 +416,17 @@ const App: React.FC = () => {
           }}
         >
           <h2>Instructions</h2>
-          <img
+          <img 
             src={instructionsImage}
-            alt="Instructions Visual"
+            alt="Instructions Visual" 
             style={{
               maxWidth: "100%",
               maxHeight: "80%",
               borderRadius: "10px",
             }}
           />
-          <button
-            onClick={togglePopup}
+          <button 
+            onClick={togglePopup} 
             style={{
               marginTop: "10px",
               padding: "10px 20px",
@@ -446,4 +446,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
