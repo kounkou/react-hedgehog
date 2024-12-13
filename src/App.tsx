@@ -65,8 +65,8 @@ export default App;
 import React, { useState } from "react";
 import instructionsImage from './instructions.png';
 
-const GRID_SIZE = 5;
-const NUMBER_RANGE = 5;
+const GRID_SIZE = 6;
+const NUMBER_RANGE = 8;
 
 type Cell = {
   value: number;
