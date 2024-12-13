@@ -63,6 +63,7 @@ export default App;
 */
 
 import React, { useState } from "react";
+import instructionsImage from './instructions.png';
 
 const GRID_SIZE = 5;
 const NUMBER_RANGE = 5;
@@ -95,6 +96,7 @@ const App: React.FC = () => {
   const [start, setStart] = useState<[number, number] | null>(null);
   const [end, setEnd] = useState<[number, number] | null>(null);
   const [score, setScore] = useState<number>(0);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleCellClick = (row: number, col: number) => {
     if (start && start[0] === row && start[1] === col) {
@@ -318,11 +320,13 @@ const App: React.FC = () => {
     console.log(`Displaying solutions. Total score: ${totalScore}`);
   };
 
+  const togglePopup = () => setIsPopupOpen(!isPopupOpen);
 
   return (
     <div style={{ padding: "20px", display: "flex", flexDirection: "column", alignItems: "center" }}>
       <h1>La Grille</h1>
       <h2>Points: {score}</h2>
+
       <div
         style={{
           display: "grid",
@@ -384,6 +388,59 @@ const App: React.FC = () => {
           Solutions
         </button>
       </div>
+      <div style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+        <button
+          onClick={togglePopup}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            borderRadius: "8px",
+            cursor: "pointer",
+            width: "310px",
+          }}>
+            Instructions
+        </button>
+        </div>
+      {isPopupOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "white",
+            padding: "20px",
+            boxShadow: "0 0 10px rgba(0, 0, 0, 0.3)",
+            borderRadius: "10px",
+            textAlign: "center",
+          }}
+        >
+          <h2>Instructions</h2>
+          <img
+            src={instructionsImage}
+            alt="Instructions Visual"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "80%",
+              borderRadius: "10px",
+            }}
+          />
+          <button
+            onClick={togglePopup}
+            style={{
+              marginTop: "10px",
+              padding: "10px 20px",
+              background: "#007BFF",
+              color: "white",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Close
+          </button>
+        </div>
+      )}
     </div>
   );
 };
