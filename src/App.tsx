@@ -53,6 +53,7 @@ export default App;
 
 import React, { useState } from "react";
 import instructionsImage from './instructions.png';
+import './App.css';
 
 const GRID_SIZE = 6;
 const NUMBER_RANGE = 9;
